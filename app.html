@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#F2B200">
+<meta name="theme-color" content="#1D3F91">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Caja">
-<title>Caja Callejera</title>
+<meta name="apple-mobile-web-app-title" content="Mister Burger">
+<title>Mister Burger · Caja</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
@@ -15,17 +17,17 @@
 /* Layout: one-column phone POS — sticky header, tab bar, content, fixed cart bar. Big touch targets for older staff. */
 :root{
   --bg:#F5F4F0; --surface:#FFFFFF; --surface2:#EEEBE4; --ink:#1E1A14; --muted:#686055; --line:#DFDAD0;
-  --mustard:#F2B200; --mustard-ink:#2E2200; --ketchup:#C9302C; --ok:#24804F; --warn:#B86A00; --bar:#C9C2B4;
+  --mustard:#D7282F; --mustard-ink:#FFFFFF; --ketchup:#A51D24; --navy:#1D3F91; --navy-ink:#FFFFFF; --ok:#24804F; --warn:#B86A00; --bar:#C9C2B4;
   --f-display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
   --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#15130F; --surface:#211E18; --surface2:#2B2720; --ink:#F2EEE6; --muted:#A99F90; --line:#3A342B;
-  --mustard:#F5B800; --mustard-ink:#2E2200; --ketchup:#FF6157; --ok:#4FC584; --warn:#F2A33A; --bar:#4A4338; color-scheme:dark}}
+  --mustard:#E8414A; --mustard-ink:#FFFFFF; --ketchup:#FF7A70; --navy:#1D3F91; --navy-ink:#FFFFFF; --ok:#4FC584; --warn:#F2A33A; --bar:#4A4338; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#15130F; --surface:#211E18; --surface2:#2B2720; --ink:#F2EEE6; --muted:#A99F90; --line:#3A342B;
-  --mustard:#F5B800; --mustard-ink:#2E2200; --ketchup:#FF6157; --ok:#4FC584; --warn:#F2A33A; --bar:#4A4338; color-scheme:dark}
+  --mustard:#E8414A; --mustard-ink:#FFFFFF; --ketchup:#FF7A70; --navy:#1D3F91; --navy-ink:#FFFFFF; --ok:#4FC584; --warn:#F2A33A; --bar:#4A4338; color-scheme:dark}
 *{box-sizing:border-box}
 html,body{margin:0}
 :root{padding-top:env(safe-area-inset-top,0px)}
@@ -38,7 +40,11 @@ button{cursor:pointer}
 h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
 .num{font-variant-numeric:tabular-nums}
 .muted{color:var(--muted)}
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px 8px;border-bottom:1px solid var(--line)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--navy);color:var(--navy-ink);padding:12px 16px 10px;margin-inline:-16px;border-bottom:4px solid var(--mustard)}
+.top .who,.top .meta{color:rgb(255 255 255 / .78)} .top .who b{color:#fff} .top .linkbtn{color:#FFD3D5} .top .meta .stale{color:#FFD36B}
+.top .tab{background:rgb(255 255 255 / .1);border-color:rgb(255 255 255 / .22);color:#fff} .top .tab[aria-selected="true"]{background:#fff;color:var(--navy);border-color:#fff}
+.logo-sm{width:40px;height:40px;border-radius:50%;flex:none;background:#fff;box-shadow:0 0 0 2px #fff}
+.logo-big{display:block;width:min(280px,78%);height:auto;margin:0 auto}
 .top-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;min-width:0}
 .brand span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -59,7 +65,7 @@ h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
 .login h1{font-size:34px;font-weight:800;line-height:1.05}
 .userbtn{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:var(--surface);font-size:20px;font-weight:700;text-align:left}
 .userbtn small{display:block;font-size:14px;font-weight:400;color:var(--muted)}
-.avatar{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--mustard);color:var(--mustard-ink);font-family:var(--f-display);font-weight:800;font-size:22px;flex:none}
+.avatar{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:var(--navy-ink);font-family:var(--f-display);font-weight:800;font-size:22px;flex:none}
 .pin-dots{display:flex;gap:14px;justify-content:center;margin-block:8px}
 .pin-dots i{width:18px;height:18px;border-radius:50%;border:2px solid var(--ink)}
 .pin-dots i.on{background:var(--ink)}
@@ -72,7 +78,7 @@ h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
 @keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
 .chips{display:flex;gap:8px;overflow-x:auto;padding-block:14px 6px;scrollbar-width:none}
 .chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 16px;font-weight:700;white-space:nowrap}
-.chip[aria-pressed="true"]{background:var(--mustard);color:var(--mustard-ink);border-color:var(--mustard)}
+.chip[aria-pressed="true"]{background:var(--navy);color:var(--navy-ink);border-color:var(--navy)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:8px}
 .prod{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;padding:14px;border-radius:18px;border:1px solid var(--line);background:var(--surface);min-height:150px;transition:transform .08s}
 .prod:active{transform:scale(.97)}
@@ -310,7 +316,7 @@ function commit(p){ Promise.resolve(p&&p.commit?p.commit():p).catch(e=>{console.
 /* ---- Local (solo este teléfono) ---- */
 function localInit(){
   let s=null; try{ s=JSON.parse(localStorage.getItem(KEY)||'null') }catch(e){}
-  if(!s){ s={cfg:{biz:'Mi Puesto',rate:200,rateDate:'',users:DEFAULT_USERS},products:clean(DEFAULT_PRODUCTS),sales:[]}; s.sales=demoSales(s.products) }
+  if(!s){ s={cfg:{biz:'Mister Burger',rate:200,rateDate:'',users:DEFAULT_USERS},products:clean(DEFAULT_PRODUCTS),sales:[]}; s.sales=demoSales(s.products) }
   S=s; migrate(); localSave(); ready=true; resolveMe(); render();
 }
 function localSave(){ try{ localStorage.setItem(KEY,JSON.stringify(S)) }catch(e){} refresh() }
@@ -330,7 +336,7 @@ async function fbInit(){
 }
 function fbSeed(){
   const b=F.fs.writeBatch(F.db);
-  b.set(F.fs.doc(F.db,'cc_config','main'),{biz:'Mi Puesto',rate:200,rateDate:'',users:DEFAULT_USERS});
+  b.set(F.fs.doc(F.db,'cc_config','main'),{biz:'Mister Burger',rate:200,rateDate:'',users:DEFAULT_USERS});
   DEFAULT_PRODUCTS.forEach(p=>{const {id,...r}=p; b.set(F.fs.doc(F.db,'cc_products',id),r)});
   commit(b);
 }
@@ -402,7 +408,7 @@ function render(){
     :NET.pending?'<span class="net wait"><i></i>Subiendo…</span>':'<span class="net on"><i></i>En línea</span>';
   app.innerHTML=`<div class="wrap">
     <header class="top">
-      <div class="top-row"><div class="brand"><i class="dot"></i><span>${esc(S.cfg.biz)}</span></div>
+      <div class="top-row"><div class="brand"><img class="logo-sm" src="avatar.webp" alt=""><span>${esc(S.cfg.biz)}</span></div>
         <div class="who"><b>${esc(me.name)}</b> · ${R().n}<br><button class="linkbtn" id="logout">Salir</button></div></div>
       <div class="meta num"><span class="${stale&&R().edit?'stale':''}">Tasa ${fmt2(S.cfg.rate)} Bs/$${stale&&me.role==='dueno'?' · actualízala en Ajustes':''}</span>${net}</div>
       ${tabs.length>1?`<nav class="tabs" role="tablist">${tabs.map(k=>`<button class="tab" role="tab" data-tab="${k}" aria-selected="${V.tab===k}">${TABN[k]}</button>`).join('')}</nav>`:''}
@@ -417,13 +423,14 @@ function render(){
 /* ---- Entrada con clave ---- */
 function loginView(){
   if(!V.pinUser) return `<div class="wrap login"><div class="login-card">
-    <div class="brand"><i class="dot"></i><span>${esc(S.cfg.biz)}</span></div>
+    <img class="logo-big" src="logo.webp" alt="${esc(S.cfg.biz)}">
     <h1>¿Quién está trabajando?</h1>
     ${S.cfg.users.map(u=>`<button class="userbtn" data-u="${u.id}"><span class="avatar">${esc((u.name||'?')[0])}</span><span>${esc(u.name)}<small>${ROLES[u.role].n}</small></span></button>`).join('')}
   </div></div>`;
   const u=S.cfg.users.find(x=>x.id===V.pinUser);
   return `<div class="wrap login"><div class="login-card" id="pinCard">
     <button class="linkbtn" id="back" style="justify-self:start">← Cambiar persona</button>
+    <img class="logo-sm" src="avatar.webp" alt="" style="width:64px;height:64px">
     <h1>Hola, ${esc(u.name)}</h1><p class="muted" style="margin:0">Escribe tu clave de 4 números</p>
     <div class="pin-dots">${[0,1,2,3].map(i=>`<i class="${i<V.pin.length?'on':''}"></i>`).join('')}</div>
     <div class="err" id="err"></div>
